@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: arial, sans-serif;
+    text-align: center;
+    font-size: 100px;
+    background-color: #201355;
+    color: white;
+    margin-top: 200px;
+}

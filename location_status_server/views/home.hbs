@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location status</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <span id="message">{{ message }}</span>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script>
+ var sock = new SockJS('http://localhost:1338/socket');
+ sock.onopen = function() {
+     console.log('open');
+ };
+ sock.onmessage = function(e) {
+     console.log('message', e.data);
+     document.getElementById('message').innerHTML = e.data;
+ };
+ sock.onclose = function() {
+     console.log('close');
+ };
+</script>
+</body>
+</html>
