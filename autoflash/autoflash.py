@@ -8,13 +8,10 @@ from win32com.shell import shell, shellcon
 
 class FilecopyHandler(PatternMatchingEventHandler):
     patterns = ['*.hex']
-    flashed_files = []
     drive = None
 
     def on_modified(self, event):
         _, filename = ntpath.split(event.src_path)
-        if filename in self.flashed_files:
-            return
 
         print event.src_path, event.event_type
         
@@ -25,7 +22,10 @@ class FilecopyHandler(PatternMatchingEventHandler):
 
         if os.path.isfile(dest):
             print 'Success'
-            self.flashed_files.append(filename)
+            try:
+                os.remove(path + '/' + filename)
+            except:
+                pass
 
 
 if __name__ == '__main__':
