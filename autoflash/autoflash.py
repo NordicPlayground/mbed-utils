@@ -2,9 +2,18 @@ import time
 import sys
 import os
 import ntpath
+import datetime
+import colorama
+from termcolor import colored
 from watchdog.observers import Observer  
 from watchdog.events import PatternMatchingEventHandler
 from win32com.shell import shell, shellcon
+
+def log(*args):
+    print '[%s]' % datetime.datetime.now(),
+    for arg in args:
+        print arg,
+    print
 
 class FilecopyHandler(PatternMatchingEventHandler):
     patterns = ['*.hex']
@@ -13,7 +22,7 @@ class FilecopyHandler(PatternMatchingEventHandler):
     def on_modified(self, event):
         _, filename = ntpath.split(event.src_path)
 
-        print event.src_path, event.event_type
+        log(colored('Flashing %s...' % filename, 'cyan'))
         
         dest = self.drive + '\\' + filename
         shell.SHFileOperation(
@@ -21,7 +30,7 @@ class FilecopyHandler(PatternMatchingEventHandler):
         )
 
         if os.path.isfile(dest):
-            print 'Success'
+            log(colored('Success', 'green'))
             try:
                 os.remove(path + '/' + filename)
             except:
@@ -39,7 +48,12 @@ if __name__ == '__main__':
     observer.schedule(handler, path=path)
     observer.start()
 
-    print 'Watching folder', path, 'copying to', drive
+    colorama.init()
+
+    print colored('Watching folder', 'cyan'),
+    print colored(path, 'yellow'),
+    print colored('copying to', 'cyan'),
+    print colored(drive, 'yellow')
 
     try:
         while True:
