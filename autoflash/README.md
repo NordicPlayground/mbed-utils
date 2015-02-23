@@ -1,5 +1,6 @@
-autoflash
-=========
+# autoflash
+
+**Windows only**
 
 Run autoflash from bash etc.
 
