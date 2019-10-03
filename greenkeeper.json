@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "location_status_server/package.json"
+      ]
+    }
+  }
+}
