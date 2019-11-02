@@ -4,7 +4,7 @@
   "description": "Show the location status of a person",
   "main": "index.js",
   "dependencies": {
-    "express": "4.2.x",
+    "express": "4.17.x",
     "body-parser": "~1.0.0",
     "express3-handlebars": "0.5.0",
     "sockjs": "0.3.9"
